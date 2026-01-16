@@ -2,7 +2,12 @@
 namespace App\Controllers;
 
 class Home extends Controller{
-    public function index(){
-        echo 'this is default controller home index';
+    public function index($name = 'Guest') 
+    {
+        $data = [
+            'title' => 'Welcome to TalentHub',
+            'user'  => $name
+        ];
+        $this->view('home/index', $data);
     }
 }
