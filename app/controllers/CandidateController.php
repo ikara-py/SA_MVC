@@ -3,7 +3,12 @@
 namespace App\Controllers;
 
 class CandidateController extends Controller {
-    public function index(){
-        echo 'this is CandidateController index';
+    public function index($name = 'Candidate') 
+    {
+        $data = [
+            'title' => 'Welcome to TalentHub',
+            'user'  => $name
+        ];
+        $this->view('home/index', $data);
     }
 }
