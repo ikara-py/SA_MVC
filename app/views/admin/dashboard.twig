@@ -1,3 +1,27 @@
-<?php 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>TalentHub</h1>
+    </header>
 
-echo "Admin dashboard";
+    <main>
+        <h2>{{ title }}</h2>
+        <p>Hello, <strong>{{ user }}</strong>! Welcome back.</p>
+        
+        {# You might use conditional logic here based on the title or user type #}
+        {% if "Admin" in title %}
+            <p>Accessing the administrative panel...</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TalentHub</p>
+    </footer>
+</body>
+</html>
