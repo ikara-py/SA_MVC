@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - TalentHub</title>
+</head>
+    <body>
+        <div>
+            <form action="/AuthController/register" method="POST">
+                <h1>Register for TalentHub</h1>
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <label>I am a:</label>
+                <select name="role">
+                    <option value="candidate">Candidate</option>
+                    <option value="recruiter">Recruiter</option>
+                </select>
+
+                <button type="submit">Create Account</button>
+            </form>
+
+            <p>Don't have an account? <a href="/AuthController/showRegister">Register here</a></p>
+        </div>
+    </body>
+
+
+</html>
