@@ -1,6 +1,6 @@
 <?php
 
-namespace App\repositories;
+namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\RoleRepository;
@@ -21,7 +21,7 @@ class UserRepository
     {
         $sql = "INSERT INTO users (first_name, last_name, email, password, role_id) 
                 VALUES (:first_name, :last_name, :email, :password, :role_id)";
-                $stmt = $this->db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
             'first_name' => $user->getFirstName(),

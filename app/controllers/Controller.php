@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class Controller
 {
@@ -14,6 +15,7 @@ class Controller
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        require_once __DIR__ . '/../../config/config.php';
 
         $loader = new FilesystemLoader(__DIR__ . '/../views');        
         $this->twig = new Environment($loader, [
@@ -21,6 +23,13 @@ class Controller
             'debug' => true,
         ]);
         $this->twig->addGlobal('session', $_SESSION);
+        $this->twig->addGlobal('base_url', BASE_URL);
+        $this->twig->addFunction(new TwigFunction('url', function ($path = '') {
+            return url($path);
+        }));
+        $this->twig->addFunction(new TwigFunction('asset', function ($path = '') {
+            return asset($path);
+        }));
     }
 
     public function view($view, $data = []): void
@@ -31,7 +40,7 @@ class Controller
             if (file_exists('../app/views/errors/404.php')) {
                 require_once '../app/views/errors/404.php';
             } else {
-                die("404 page is missing.");
+                die("404 - View not found: {$view}");
             }
         }
     }

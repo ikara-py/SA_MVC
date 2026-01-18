@@ -2,29 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - TalentHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TalentHub</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-    <body>
-        <div>
-            <form action="/AuthController/register" method="POST">
-                <h1>Register for TalentHub</h1>
-                <input type="text" name="first_name" placeholder="First Name" required>
-                <input type="text" name="last_name" placeholder="Last Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>TalentHub</h1>
+                <p>Create your account</p>
+            </div>
 
-                <label>I am a:</label>
-                <select name="role">
-                    <option value="candidate">Candidate</option>
-                    <option value="recruiter">Recruiter</option>
-                </select>
+            {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+            {% endif %}
 
-                <button type="submit">Create Account</button>
+            {% if success %}
+                <div class="success-message">
+                    {{ success }}
+                </div>
+            {% endif %}
+
+            <form action="{{ url('auth/register') }}" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input 
+                        type="text" 
+                        id="first_name" 
+                        name="first_name" 
+                        required 
+                        placeholder="John"
+                        value="{{ first_name ?? '' }}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="last_name" 
+                        name="last_name" 
+                        required 
+                        placeholder="Doe"
+                        value="{{ last_name ?? '' }}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        placeholder="you@example.com"
+                        value="{{ email ?? '' }}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required 
+                        placeholder="Min. 8 characters"
+                        minlength="8"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirm_password" 
+                        name="confirm_password" 
+                        required 
+                        placeholder="Re-enter password"
+                        minlength="8"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Register as</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select role</option>
+                        <option value="candidate" {{ role == 'candidate' ? 'selected' : '' }}>Candidate</option>
+                        <option value="recruiter" {{ role == 'recruiter' ? 'selected' : '' }}>Recruiter</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Account</button>
             </form>
 
-            <p>Don't have an account? <a href="/AuthController/showRegister">Register here</a></p>
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ url('auth/showLogin') }}">Sign in</a></p>
+                <p><a href="{{ url('') }}">← Back to Home</a></p>
+            </div>
         </div>
-    </body>
-
-
+    </div>
+</body>
 </html>
