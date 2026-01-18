@@ -1,11 +1,13 @@
 CREATE DATABASE talenthub_db;
 USE talenthub_db;
 
+-- Create roles table
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
+-- Create users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
@@ -17,10 +19,13 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE RESTRICT
 );
 
+-- Insert roles
 INSERT INTO roles (name) VALUES ('admin');
 INSERT INTO roles (name) VALUES ('candidate');
 INSERT INTO roles (name) VALUES ('recruiter');
 
--- Email: admin@talenthub.com | Password: password
+-- Insert test users
+-- password : password
+-- Admin User
 INSERT INTO users (first_name, last_name, email, password, role_id) 
-VALUES ('Ali', 'Kara', 'admin@test.com', '$2y$12$bkfGxxjVItNxcbGp1o8AAex6E8/hN09Kl17DKIFSbWJNWygTyw/X2', 1);
+VALUES ('ali', 'kara', 'admin@talenthub.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1);
