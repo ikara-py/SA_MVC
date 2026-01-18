@@ -2,26 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>TalentHub</h1>
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">TalentHub Admin</h1>
+                <nav>
+                    <span class="user-info">{{ user }} (Admin)</span>
+                    <a href="{{ url('auth/logout') }}" class="btn btn-outline">Logout</a>
+                </nav>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <h2>{{ title }}</h2>
-        <p>Hello, <strong>{{ user }}</strong>! Welcome back.</p>
-        
-        {# You might use conditional logic here based on the title or user type #}
-        {% if "Admin" in title %}
-            <p>Accessing the administrative panel...</p>
-        {% endif %}
-    </main>
+    <div class="dashboard-container">
 
-    <footer>
-        <p>&copy; 2026 TalentHub</p>
+        <main class="dashboard-main">
+            <div class="dashboard-content">
+                <h2>{{ title }}</h2>
+                <p>Welcome, <strong>{{ user }}</strong>!</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Candidates</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Recruiters</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Jobs</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <p class="placeholder">No recent activity to display.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="dashboard-footer">
+        <div class="container">
+            <p>&copy; 2026 TalentHub</p>
+        </div>
     </footer>
 </body>
 </html>

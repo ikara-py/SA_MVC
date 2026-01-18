@@ -2,26 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>TalentHub</h1>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">TalentHub</h1>
+                <nav>
+                    {% if session.user_id %}
+                        <span>Welcome, {{ session.user_full_name }}</span>
+                        <a href="{{ url(session.user_role ~ '/index') }}" class="btn btn-secondary">Dashboard</a>
+                        <a href="{{ url('auth/logout') }}" class="btn btn-outline">Logout</a>
+                    {% else %}
+                        <a href="{{ url('auth/showLogin') }}" class="btn btn-secondary">Login</a>
+                        <a href="{{ url('auth/showRegister') }}" class="btn btn-primary">Sign Up</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <h2>{{ title }}</h2>
-        <p>Hello, <strong>{{ user }}</strong>! Welcome back.</p>
-        
-        {# You might use conditional logic here based on the title or user type #}
-        {% if "Admin" in title %}
-            <p>Accessing the administrative panel...</p>
-        {% endif %}
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>{{ title }}</h2>
+                <p class="lead">Connect talented candidates with top recruiters</p>
+                
+                {% if not session.user_id %}
+                    <div class="cta-buttons">
+                        <a href="{{ url('auth/showRegister') }}" class="btn btn-primary btn-lg">Get Started</a>
+                        <a href="{{ url('auth/showLogin') }}" class="btn btn-outline btn-lg">Sign In</a>
+                    </div>
+                {% else %}
+                    <div class="welcome-message">
+                        <p>Welcome back, <strong>{{ session.user_full_name }}</strong>!</p>
+                        <a href="{{ url(session.user_role ~ '/index') }}" class="btn btn-primary">Go to Dashboard →</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 TalentHub</p>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 TalentHub - All rights reserved</p>
+        </div>
     </footer>
 </body>
 </html>
