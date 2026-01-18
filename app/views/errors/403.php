@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403 - Access Denied</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <div style="text-align: center; margin-top: 100px;">
-        <h1>403 - Access Denied</h1>
-        <p>You do not have the required permissions to view this dashboard.</p>
-        <a href="/AuthController/logout">Sign in with a different account</a>
+    <div class="error-container">
+        <div class="error-content">
+            <h1 class="error-code">403</h1>
+            <h2>Access Denied</h2>
+            <p>You don't have permission to access this page.</p>
+            <div class="error-actions">
+                <a href="{{ url('') }}" class="btn btn-primary">Go to Homepage</a>
+                {% if session.user_id %}
+                    <a href="{{ url(session.user_role ~ '/index') }}" class="btn btn-secondary">Go to Dashboard</a>
+                {% else %}
+                    <a href="{{ url('auth/showLogin') }}" class="btn btn-secondary">Login</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>
